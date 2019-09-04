@@ -11,6 +11,7 @@ function createConnect(dbUrl: string) {
     return function connectToDatabase () {
         return connect(dbUrl, {
             useNewUrlParser: true,
+            useFindAndModify: true,
         })
     };
 }

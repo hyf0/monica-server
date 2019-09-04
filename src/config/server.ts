@@ -13,7 +13,7 @@ export function getServerConfig() {
     const dbPassword: string = process.env.DB_PASSWORD;
     return {
       port: 80,
-      host: 'unknonw',
+      host: '0.0.0.0',
       secret: 'hello, world!',
       dbUrl: `mongodb+srv://monica:${dbPassword}@cluster0-sx0ge.mongodb.net/monica`,
     };

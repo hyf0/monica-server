@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/index.ts"
+    "dev": "NODE_ENV=development nodemon ./src/index.ts",
+    "prod": "NODE_ENV=production nodemon ./src/index.ts",
+    "build": "rm -rf dist/ && tsc",
+    "serve": "pm2 start ./dist/index.js --name monica",
+    "serve:prod": "rm -rf dist/ && tsc && NODE_ENV=production pm2 start ./dist/index.js --name monica",
+    "show:80": "lsof -i:80"
   },
   "repository": {
     "type": "git",
@@ -33,6 +38,7 @@
     "koa-router": "^7.4.0",
     "mongoose": "^5.6.12",
     "nodemon": "^1.19.1",
+    "pm2": "^3.5.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   }
