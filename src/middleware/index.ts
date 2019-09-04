@@ -1,6 +1,5 @@
 import { Middleware } from 'koa';
 import jwt from 'jsonwebtoken';
-import _ from 'ramda';
 
 import { getServerConfig } from '../config/server';
 import { thrower } from './errors';

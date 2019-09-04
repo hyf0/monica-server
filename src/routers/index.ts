@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import _ from 'ramda';
 import fs from 'fs';
 import path from 'path';
 
