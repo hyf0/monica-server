@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { AuthenticationError } from 'apollo-server-koa';
-import Model from '../../Model';
+import Model from '../../model';
 
 import { IResolverContext } from '../../..';
 import { IUserDocument } from '../../model/user';

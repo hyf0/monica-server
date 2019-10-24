@@ -2,8 +2,8 @@ import { Context } from 'koa';
 import jwt from 'jsonwebtoken';
 import { IResolverContext } from '../..';
 import R from 'ramda';
-import { IUserDocument } from '../Model/user';
-import Model from '../Model';
+import { IUserDocument } from '../model/user';
+import Model from '../model';
 import serverConfig from '../serverConfig';
 
 export async function settingLoginStatus(

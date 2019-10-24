@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server-koa';
-import Model from '../../Model';
-import { IProjectDocument } from '../../Model/project';
-import { ITaskDocument } from '../../Model/task';
+import Model from '../../model';
+import { IProjectDocument } from '../../model/project';
+import { ITaskDocument } from '../../model/task';
 import { IResolverContext } from '../../..';
 
 const { User, Project, Task } = Model;
