@@ -15,9 +15,15 @@ export default gql`
     project(id: String!): Project
   }
 
-  extend type Mutation {
-    addProject(name: String!): Project
-    delProject(id: String!): Project
+  input patchProjectInput {
+    name: String
+    isPinned: Boolean
   }
-  
+
+  extend type Mutation {
+    addProject(name: String!): Project!
+    delProject(id: String!): Project!
+    patchProject(id: String!, patcher: patchProjectInput!): Project!
+  }
+
 `;

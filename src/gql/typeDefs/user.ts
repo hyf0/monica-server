@@ -16,12 +16,17 @@ export default gql`
     token: JWToken!
   }
 
+  input loginInput {
+    username: String!
+    password: String!
+  }
+
   extend type Query {
-    login(username: String!, password: String!): LoginRes! # return JWToken
+    login(loginStatus: loginInput): LoginRes! # return JWToken
   }
 
   extend type Mutation {
     register(username: String!, password: String!): LoginRes! # return JWToken
   }
-  
+
 `;

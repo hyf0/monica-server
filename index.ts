@@ -1,12 +1,12 @@
-import Koa, { Context } from 'koa';
+import Koa, { Context as KoaContext } from 'koa';
 import KoaRouter from 'koa-router';
-import R from 'ramda';
 import { ApolloServer } from 'apollo-server-koa';
-import { typeDefs, resolvers } from './src/lib/gql';
-import db from './src/lib/model';
 import { settingLoginStatus } from './src/middleware';
-import { Document } from 'mongoose';
-import { IUserDocument } from './src/lib/model/user';
+import { IUserDocument } from './src/Model/user';
+import { db } from './src/Model';
+import typeDefs from './src/gql/typeDefs';
+import resolvers from './src/gql/resolvers';
+import serverConfig from './src/serverConfig';
 
 export interface IResolverContext {
   isLogined: boolean;
@@ -19,28 +19,28 @@ const defaultResolverContext: IResolverContext = {
 };
 
 (async function main() {
-  const router = new KoaRouter();
-  const server = new ApolloServer({
-      typeDefs: typeDefs,
-      resolvers,
-      async context({ctx}: {ctx: Context}):Promise<IResolverContext> {
-          const setedContext = await settingLoginStatus(defaultResolverContext, ctx);
-          return setedContext;
-      }
-    });
-    
-  
-  router.get('/', ctx => {
-    ctx.body = 'hello, wrold';
+  const apolloServer = new ApolloServer({
+    typeDefs: typeDefs,
+    resolvers: resolvers,
+    async context({ctx}: {ctx: KoaContext}):Promise<IResolverContext> {
+      const setedContext = await settingLoginStatus(defaultResolverContext, ctx);
+      return setedContext;
+    }
   });
+
+  const router = new KoaRouter();
+  router.get('/', ctx => {
+    ctx.body = 'server is running';
+  });
+
   const app = new Koa();
+
   app.use(router.routes());
-  
-  server.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app });
 
   await db.connect();
-  
-  app.listen({ port: 3030 }, () =>
-    console.log(`Server ready at http://localhost:3030${server.graphqlPath}`),
+
+  app.listen(serverConfig.port, serverConfig.host, () =>
+    console.log(`Server ready at http://${serverConfig.host}:${serverConfig.port}${apolloServer.graphqlPath}`),
   );
 }());

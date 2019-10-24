@@ -1,8 +1,10 @@
 import { ForbiddenError, AuthenticationError } from 'apollo-server-koa';
-import { IResolverContext } from '../../../..';
-import { Project, Task } from '../../model';
+import { IResolverContext } from '../../..';
+import Model from '../../Model';
 import { IProjectDocument } from '../../model/project';
 import { ITaskDocument } from '../../model/task';
+
+const { Project, Task } = Model;
 
 export default {
   Task: {

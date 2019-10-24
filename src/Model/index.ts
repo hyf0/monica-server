@@ -18,13 +18,16 @@ function createConnect(dbUrl: string) {
   };
 }
 
-export default {
+export const db = {
   connect: createConnect('mongodb://127.0.0.1:27017/ross'),
+}
+
+export default {
   Project: model('Project', project),
   User: model('User', user),
   Task: model('Task', task),
 };
 
-export const Project = model('Project', project);
-export const User = model('User', user);
-export const Task = model('Task', task);
+// export const Project = model('Project', project);
+// export const User = model('User', user);
+// export const Task = model('Task', task);

@@ -10,7 +10,7 @@ export default gql`
   }
 
   extend type Mutation {
-    addTask(projectId: String!, name: String!): Task
-    delTask(id: String!): Task
+    addTask(projectId: String!, name: String!): Task!
+    delTask(id: String!): Task!
   }
 `;

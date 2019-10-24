@@ -1,8 +1,10 @@
 import { AuthenticationError } from 'apollo-server-koa';
-import { IResolverContext } from '../../../..';
-import { Project, User, Task } from '../../model';
-import project from '../../model/project';
-import { ITaskDocument } from '../../model/task';
+import Model from '../../Model';
+import { IProjectDocument } from '../../Model/project';
+import { ITaskDocument } from '../../Model/task';
+import { IResolverContext } from '../../..';
+
+const { User, Project, Task } = Model;
 
 const resolvers = {
   Project: {
@@ -56,6 +58,20 @@ const resolvers = {
         throw new AuthenticationError('删除失败，或非法删除');
       return project.toObject();
     },
+    async patchProject(prev: undefined, args: {
+      id: string;
+      patcher: {
+        name?: string;
+        isPinned?: boolean;
+      }
+    },) {
+      const { id: projectId, patcher } = args;
+      const project = await Project.findById(projectId) as IProjectDocument | null;
+      if (project == null) throw new Error('未找到相应的 project');
+      Object.assign(project, patcher);
+      await project.save();
+      return project.toObject();
+    }
   },
   Query: {
     async projects(
