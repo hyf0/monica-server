@@ -18,29 +18,35 @@ const defaultResolverContext: IResolverContext = {
   user: null,
 };
 
-let requestCount = 0;
-
 (async function main() {
-  const apolloServer = new ApolloServer({
-    typeDefs: typeDefs,
-    resolvers: resolvers,
+
+  let requestCount = 0;
+  const apolloServer = new ApolloServer({ // 创建 gql 服务器
+    typeDefs,
+    resolvers,
     async context({ctx}: {ctx: KoaContext}):Promise<IResolverContext> {
       requestCount += 1;
+      // 进行鉴权设置
       const setedContext = await settingLoginStatus(defaultResolverContext, ctx);
       return setedContext;
     }
   });
 
+
+
+  const app = new Koa();
+
+  // 设置中间件
+
   const router = new KoaRouter();
   router.get('/', ctx => {
     ctx.body = `server is running, and has handled ${requestCount} request`;
   });
-
-  const app = new Koa();
-
   app.use(router.routes());
+
   apolloServer.applyMiddleware({ app });
 
+  // 连接数据库
   try {
     await db.connect(serverConfig.dbUrl);
   } catch (err) {
