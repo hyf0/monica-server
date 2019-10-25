@@ -1,6 +1,8 @@
 # 简介
 
-monica-server 是应用 [monica](https://github.com/iheyunfei/monica) 的服务端实现。
+monica-server 是应用 monica [(github地址)](https://github.com/iheyunfei/monica) 的服务端实现。
+
+应用地址：
 
 # 技术栈
 
