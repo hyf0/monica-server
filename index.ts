@@ -38,7 +38,11 @@ const defaultResolverContext: IResolverContext = {
   app.use(router.routes());
   apolloServer.applyMiddleware({ app });
 
-  await db.connect();
+  try {
+    await db.connect();
+  } catch (err) {
+    console.error(err);
+  }
 
   app.listen(serverConfig.port, serverConfig.host, () =>
     console.log(`Server ready at http://${serverConfig.host}:${serverConfig.port}${apolloServer.graphqlPath}`),
