@@ -2,6 +2,7 @@ import { IS_DEV } from './util/contants';
 
 function getServerConfig() {
   if (IS_DEV) {
+    console.log('当前处于开发模式');
     return {
       port: 3030,
       host: 'localhost',

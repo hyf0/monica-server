@@ -18,11 +18,14 @@ const defaultResolverContext: IResolverContext = {
   user: null,
 };
 
+let requestCount = 0;
+
 (async function main() {
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: resolvers,
     async context({ctx}: {ctx: KoaContext}):Promise<IResolverContext> {
+      requestCount += 1;
       const setedContext = await settingLoginStatus(defaultResolverContext, ctx);
       return setedContext;
     }
@@ -30,7 +33,7 @@ const defaultResolverContext: IResolverContext = {
 
   const router = new KoaRouter();
   router.get('/', ctx => {
-    ctx.body = 'server is running';
+    ctx.body = `server is running, and has handled ${requestCount} request`;
   });
 
   const app = new Koa();
@@ -39,7 +42,7 @@ const defaultResolverContext: IResolverContext = {
   apolloServer.applyMiddleware({ app });
 
   try {
-    await db.connect();
+    await db.connect(serverConfig.dbUrl);
   } catch (err) {
     console.error(err);
   }

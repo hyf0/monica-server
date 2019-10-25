@@ -43,8 +43,6 @@ export default {
     ) {
       const { loginStatus } = args;
       let { user: ctxUser } = ctx;
-      console.log(ctxUser);
-
       if (loginStatus == null && ctxUser == null)
         throw new AuthenticationError('未检测到登录信息');
 

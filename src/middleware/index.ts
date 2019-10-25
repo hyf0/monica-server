@@ -31,7 +31,6 @@ export async function settingLoginStatus(
       user: user,
       isLogined: true,
     });
-    // console.log(user && user.toObject(), `已经登录`);
     return newContext;
   } catch (err) {
     return resolverContext;

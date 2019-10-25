@@ -5,21 +5,32 @@ import user from './user';
 import task from './task';
 import project from './project';
 
-function createConnect(dbUrl: string) {
-  return function connectToDatabase() {
-    return connect(
-      dbUrl,
-      {
-        useNewUrlParser: true,
-        // useFindAndModify: true,
-        useUnifiedTopology: true,
-      },
-    );
-  };
+function connectToDatabase(dbUrl: string) {
+  return connect(
+    dbUrl,
+    {
+      useNewUrlParser: true,
+      // useFindAndModify: true,
+      useUnifiedTopology: true,
+    },
+  );
 }
 
+// function createConnect(dbUrl: string) {
+//   return function connectToDatabase() {
+//     return connect(
+//       dbUrl,
+//       {
+//         useNewUrlParser: true,
+//         // useFindAndModify: true,
+//         useUnifiedTopology: true,
+//       },
+//     );
+//   };
+// }
+
 export const db = {
-  connect: createConnect('mongodb://127.0.0.1:27017/ross'),
+  connect: connectToDatabase,
 }
 
 export default {

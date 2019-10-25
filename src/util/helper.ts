@@ -1,4 +1,4 @@
 export function getIsDevelopment() {
-  if (process.env.NODE_ENV === 'development')console.log('当前处于开发模式');
+  if (process.env.NODE_ENV === 'production') return true;
   return process.env.NODE_ENV === 'development';
 }

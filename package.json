@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development nodemon index.ts"
+    "dev": "cross-env NODE_ENV=development nodemon index.ts",
+    "build": "tsc",
+    "prod": "npm run build && pm2 start ./dist/index.js --name monica"
   },
   "repository": {
     "type": "git",

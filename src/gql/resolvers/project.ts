@@ -19,7 +19,6 @@ const resolvers = {
       const tasks= await Task.find({
         projectId,
       }) as ITaskDocument[];
-      console.log('tasks');
       return tasks.map(t => t.toObject());
     }
   },
