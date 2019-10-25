@@ -2,7 +2,7 @@
 
 monica-server 是应用 monica [(github地址)](https://github.com/iheyunfei/monica) 的服务端实现。
 
-应用地址：
+应用地址：[http://iheyunfei.github.io/monica/](http://iheyunfei.github.io/monica/)
 
 # 技术栈
 
